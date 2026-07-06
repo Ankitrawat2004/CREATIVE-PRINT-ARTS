@@ -602,7 +602,7 @@ function PricingPage() {
                 <h3>Interior Color</h3>
                 <a href="/#products">More about interior colors</a>
               </div>
-              <div className="pricing-card-grid is-hardcover-size">
+              <div className="pricing-card-grid is-three">
                 {pricingOptions.interior.map((option) => (
                   <PricingOptionCard
                     option={option}
@@ -636,7 +636,7 @@ function PricingPage() {
                 <h3>Cover Finish</h3>
                 <a href="/#products">More about cover finishes</a>
               </div>
-              <div className="pricing-card-grid is-two">
+              <div className="pricing-card-grid is-three">
                 {pricingOptions.cover.map((option) => (
                   <PricingOptionCard
                     option={option}
