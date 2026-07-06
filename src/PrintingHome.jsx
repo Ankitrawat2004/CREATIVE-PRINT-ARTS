@@ -313,8 +313,8 @@ const pricingOptions = {
     },
   ],
   interior: [
-    { title: "Standard B&W", image: interiorStandardBwImage, price: 0 },
-    { title: "Premium B&W", image: interiorPremiumBwImage, price: 12 },
+    { title: "Black & White Standard", image: interiorStandardBwImage, price: 0 },
+    { title: "Black & White Premium", image: interiorPremiumBwImage, price: 12 },
     { title: "Standard Color", image: interiorStandardColorImage, price: 28 },
     { title: "Premium Color", image: interiorPremiumColorImage, price: 44 },
   ],
