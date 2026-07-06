@@ -1268,6 +1268,10 @@ h3 {
   font-weight: 400;
 }
 
+.pricing-input-grid label:first-child select {
+  width: calc(100% - 10px);
+}
+
 .pricing-input-grid select:focus,
 .pricing-input-grid input:focus {
   border-color: #5d7de8;
