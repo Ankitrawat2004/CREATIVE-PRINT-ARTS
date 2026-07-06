@@ -44,6 +44,27 @@ import raisedUvImage from "./assets/products/raised-uv-stickers.png";
 import roundStickersImage from "./assets/products/round-stickers.png";
 import stickerSheetsImage from "./assets/products/sticker-sheets.png";
 import thankYouCardImage from "./assets/products/thank-you-card.png";
+import bindingCaseWrapImage from "./assets/pricing/binding-case-wrap.png";
+import bindingCoilBoundImage from "./assets/pricing/binding-coil-bound.png";
+import bindingLinenWrapImage from "./assets/pricing/binding-linen-wrap.png";
+import bindingPerfectBoundImage from "./assets/pricing/binding-perfect-bound.png";
+import bindingSaddleStitchImage from "./assets/pricing/binding-saddle-stitch.png";
+import coverGlossyImage from "./assets/pricing/cover-glossy.png";
+import coverMatteImage from "./assets/pricing/cover-matte.png";
+import interiorPremiumBwImage from "./assets/pricing/interior-premium-bw.png";
+import interiorPremiumColorImage from "./assets/pricing/interior-premium-color.png";
+import interiorStandardBwImage from "./assets/pricing/interior-standard-bw.png";
+import interiorStandardColorImage from "./assets/pricing/interior-standard-color.png";
+import paper60Image from "./assets/pricing/paper-60-uncoated.png";
+import paper70Image from "./assets/pricing/paper-70-uncoated.png";
+import paper80Image from "./assets/pricing/paper-80-coated.png";
+import typeCalendarImage from "./assets/pricing/type-calendar.png";
+import typeComicBookImage from "./assets/pricing/type-comic-book.png";
+import typeEbookImage from "./assets/pricing/type-ebook.png";
+import typeMagazineImage from "./assets/pricing/type-magazine.png";
+import typePhotoBookImage from "./assets/pricing/type-photo-book.png";
+import typePrintBookImage from "./assets/pricing/type-print-book.png";
+import typeYearbookImage from "./assets/pricing/type-yearbook.png";
 
 const navItems = [
   { label: "Sticker/Labels", href: "/#products" },
@@ -224,43 +245,43 @@ const brandTags = [
 const pricingProductTypes = [
   {
     name: "Print Book",
-    visual: "print-book",
+    image: typePrintBookImage,
     basePrice: 42,
     pageRate: 1.15,
   },
   {
     name: "Photo Book",
-    visual: "photo-book",
+    image: typePhotoBookImage,
     basePrice: 86,
     pageRate: 2.6,
   },
   {
     name: "Comic Book",
-    visual: "comic-book",
+    image: typeComicBookImage,
     basePrice: 64,
     pageRate: 1.85,
   },
   {
     name: "Magazine",
-    visual: "magazine",
+    image: typeMagazineImage,
     basePrice: 38,
     pageRate: 1.3,
   },
   {
     name: "Yearbook",
-    visual: "yearbook",
+    image: typeYearbookImage,
     basePrice: 112,
     pageRate: 2.9,
   },
   {
     name: "Calendar",
-    visual: "calendar",
+    image: typeCalendarImage,
     basePrice: 58,
     pageRate: 2.1,
   },
   {
     name: "Ebook",
-    visual: "ebook",
+    image: typeEbookImage,
     basePrice: 24,
     pageRate: 0.45,
   },
@@ -278,33 +299,33 @@ const pricingOptions = {
     {
       group: "Paperback Options",
       items: [
-        { title: "Perfect Bound", visual: "perfect", price: 18 },
-        { title: "Coil Bound", visual: "coil", price: 26 },
-        { title: "Saddle Stitch", visual: "saddle", price: 12 },
+        { title: "Perfect Bound", image: bindingPerfectBoundImage, price: 18 },
+        { title: "Coil Bound", image: bindingCoilBoundImage, price: 26 },
+        { title: "Saddle Stitch", image: bindingSaddleStitchImage, price: 12 },
       ],
     },
     {
       group: "Hardcover Options",
       items: [
-        { title: "Case Wrap", visual: "case", price: 54 },
-        { title: "Linen Wrap", visual: "linen", price: 68 },
+        { title: "Case Wrap", image: bindingCaseWrapImage, price: 54 },
+        { title: "Linen Wrap", image: bindingLinenWrapImage, price: 68 },
       ],
     },
   ],
   interior: [
-    { title: "Standard B&W", visual: "standard-bw", price: 0 },
-    { title: "Premium B&W", visual: "premium-bw", price: 12 },
-    { title: "Standard Color", visual: "standard-color", price: 28 },
-    { title: "Premium Color", visual: "premium-color", price: 44 },
+    { title: "Standard B&W", image: interiorStandardBwImage, price: 0 },
+    { title: "Premium B&W", image: interiorPremiumBwImage, price: 12 },
+    { title: "Standard Color", image: interiorStandardColorImage, price: 28 },
+    { title: "Premium Color", image: interiorPremiumColorImage, price: 44 },
   ],
   paper: [
-    { title: "60# Uncoated", visual: "paper-60", price: 0 },
-    { title: "70# Uncoated", visual: "paper-70", price: 14 },
-    { title: "80# Coated", visual: "paper-80", price: 22 },
+    { title: "60# Uncoated", image: paper60Image, price: 0 },
+    { title: "70# Uncoated", image: paper70Image, price: 14 },
+    { title: "80# Coated", image: paper80Image, price: 22 },
   ],
   cover: [
-    { title: "Glossy", visual: "glossy", price: 0 },
-    { title: "Matte", visual: "matte", price: 9 },
+    { title: "Glossy", image: coverGlossyImage, price: 0 },
+    { title: "Matte", image: coverMatteImage, price: 9 },
   ],
 };
 
@@ -394,11 +415,7 @@ function PricingOptionCard({ option, selected, onSelect }) {
       type="button"
       onClick={() => onSelect(option)}
     >
-      <span className={`pricing-option-art is-${option.visual}`} aria-hidden="true">
-        <i />
-        <b />
-        <em />
-      </span>
+      <img className="pricing-option-art" src={option.image} alt={option.title} />
       <span>{option.title}</span>
     </button>
   );
@@ -505,7 +522,7 @@ function PricingPage() {
                 key={product.name}
                 onClick={() => resetForProduct(product)}
               >
-                <span className={`product-type-art is-${product.visual}`} aria-hidden="true" />
+                <img className="product-type-art" src={product.image} alt="" />
                 <span>{product.name}</span>
               </button>
             ))}
