@@ -1332,6 +1332,11 @@ h3 {
   grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
+.pricing-card-grid.is-hardcover-size {
+  grid-template-columns: repeat(2, minmax(0, calc((100% - 32px) / 3)));
+  justify-content: start;
+}
+
 .pricing-option-card {
   position: relative;
   display: grid;
@@ -2388,7 +2393,8 @@ h3 {
 
   .pricing-input-grid,
   .pricing-card-grid.is-three,
-  .pricing-card-grid.is-two {
+  .pricing-card-grid.is-two,
+  .pricing-card-grid.is-hardcover-size {
     grid-template-columns: 1fr;
   }
 
