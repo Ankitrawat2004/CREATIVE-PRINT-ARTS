@@ -327,6 +327,14 @@ const pricingOptions = {
     { title: "Glossy", image: coverGlossyImage, price: 0 },
     { title: "Matte", image: coverMatteImage, price: 9 },
   ],
+  designing: [
+    { title: "Not Required", key: "not-required", price: 0 },
+    { title: "Yes You Can", key: "formatting-yes", price: 1500 },
+  ],
+  isbn: [
+    { title: "Not Apply", key: "not-apply", price: 0 },
+    { title: "Yes, Assign Unique ISBN", key: "assign-isbn", price: 499 },
+  ],
 };
 
 const summaryRows = [
@@ -336,6 +344,8 @@ const summaryRows = [
   { key: "interior", label: "Interior Color" },
   { key: "paper", label: "Paper Type" },
   { key: "cover", label: "Cover Finish" },
+  { key: "designing", label: "Designing & Formatting" },
+  { key: "isbn", label: "ISBN Allocation" },
 ];
 
 function isPricingPage() {
@@ -421,6 +431,21 @@ function PricingOptionCard({ option, selected, onSelect }) {
   );
 }
 
+function FeatureChoiceCard({ option, selected, onSelect }) {
+  return (
+    <button
+      className={`pricing-option-card feature-choice-card ${selected ? "is-selected" : ""}`}
+      type="button"
+      onClick={() => onSelect(option)}
+    >
+      <span className={`feature-choice-art is-${option.key}`} aria-hidden="true">
+        <FileText size={24} />
+      </span>
+      <span>{option.title}</span>
+    </button>
+  );
+}
+
 function PricingAccordion({ title, children }) {
   const [open, setOpen] = useState(false);
 
@@ -443,6 +468,9 @@ function PricingPage() {
   const [interior, setInterior] = useState(null);
   const [paper, setPaper] = useState(null);
   const [cover, setCover] = useState(null);
+  const [designing, setDesigning] = useState(pricingOptions.designing[0]);
+  const [isbn, setIsbn] = useState(pricingOptions.isbn[0]);
+  const [copies, setCopies] = useState("25");
   const [retailDistribution, setRetailDistribution] = useState(true);
 
   const selectedSize = bookSizes.find((size) => size.label === bookSize);
@@ -460,10 +488,15 @@ function PricingPage() {
           interior.price +
           paper.price +
           cover.price +
+          designing.price +
+          isbn.price +
           (retailDistribution ? 10 : 0)) *
           1.18,
       )
     : 0;
+  const copyCount = Math.max(Number(copies) || 25, 25);
+  const discountRate = copyCount >= 300 ? 0.14 : copyCount >= 250 ? 0.12 : copyCount >= 200 ? 0.1 : 0;
+  const estimateTotal = Math.round(calculatedPrice * copyCount * (1 - discountRate));
   const optionSummary = {
     size: bookSize,
     pages: hasValidPageCount ? `${pages} pages` : "",
@@ -471,6 +504,8 @@ function PricingPage() {
     interior: interior?.title,
     paper: paper?.title,
     cover: cover?.title,
+    designing: designing?.title,
+    isbn: isbn?.title,
   };
 
   const resetForProduct = (product) => {
@@ -481,6 +516,9 @@ function PricingPage() {
     setInterior(null);
     setPaper(null);
     setCover(null);
+    setDesigning(pricingOptions.designing[0]);
+    setIsbn(pricingOptions.isbn[0]);
+    setCopies("25");
   };
 
   return (
@@ -645,6 +683,104 @@ function PricingPage() {
                     key={option.title}
                   />
                 ))}
+              </div>
+            </section>
+
+            <section className="pricing-section feature-step-section">
+              <div className="feature-step-heading">
+                <span>6</span>
+                <div>
+                  <h3>Designing And Formatting</h3>
+                  <p>Rs.1500/- Extra Per Cover Page And Rs.50 Extra Per Inner Page</p>
+                </div>
+              </div>
+              <div className="pricing-card-grid is-two feature-pair-grid">
+                {pricingOptions.designing.map((option) => (
+                  <FeatureChoiceCard
+                    option={option}
+                    selected={designing?.title === option.title}
+                    onSelect={setDesigning}
+                    key={option.title}
+                  />
+                ))}
+              </div>
+            </section>
+
+            <section className="pricing-section feature-step-section">
+              <div className="feature-step-heading">
+                <span>7</span>
+                <div>
+                  <h3>ISBN Allocation</h3>
+                  <p>It May Take 5 to 7 More Working Days To Deliver.</p>
+                </div>
+              </div>
+              <p className="feature-note">
+                An International Standard Book Number provides publishing information that gives
+                retailers a way to report your book sales.
+              </p>
+              <div className="pricing-card-grid is-two feature-pair-grid">
+                {pricingOptions.isbn.map((option) => (
+                  <FeatureChoiceCard
+                    option={option}
+                    selected={isbn?.title === option.title}
+                    onSelect={setIsbn}
+                    key={option.title}
+                  />
+                ))}
+              </div>
+            </section>
+
+            <section className="pricing-section feature-step-section">
+              <div className="feature-step-heading">
+                <span>8</span>
+                <div>
+                  <h3>Pricing Estimate</h3>
+                  <p>
+                    See available shipping options and pricing based on the product options selected
+                    above.
+                  </p>
+                </div>
+              </div>
+              <div className="pricing-estimate-panel">
+                <div className="estimate-form">
+                  <label>
+                    <span>Number of Copies (Minimum 25)</span>
+                    <input
+                      type="number"
+                      min="25"
+                      value={copies}
+                      onChange={(event) => setCopies(event.target.value)}
+                    />
+                  </label>
+                  <button type="button">Share Estimate</button>
+                  <p>
+                    Press the share estimate button and get an instant estimate delivered to your
+                    email or WhatsApp.
+                  </p>
+                </div>
+                <div className="discount-table" aria-label="Bulk discount levels">
+                  <h4>Bulk Discount Levels</h4>
+                  <div>
+                    <span>Book Quantity</span>
+                    <span>Discounted Price</span>
+                  </div>
+                  <div>
+                    <span>200-249 copies</span>
+                    <strong>10% off</strong>
+                  </div>
+                  <div>
+                    <span>250-299 copies</span>
+                    <strong>12% off</strong>
+                  </div>
+                  <div>
+                    <span>300+ copies</span>
+                    <strong>14% off</strong>
+                  </div>
+                  <small>Discounts are applied automatically at checkout.</small>
+                </div>
+              </div>
+              <div className="estimate-total">
+                Estimated total: <strong>Rs.{estimateTotal.toLocaleString("en-IN")}.00</strong>
               </div>
             </section>
 
