@@ -3,16 +3,21 @@ import {
   BadgePercent,
   BookOpen,
   Calculator,
+  CheckCircle2,
   ChevronDown,
   ChevronLeft,
   ChevronRight,
   Clock,
   CreditCard,
+  Download,
   Facebook,
+  FileText,
   Instagram,
+  Info,
   Lock,
   Mail,
   Menu,
+  PackageCheck,
   Phone,
   Pencil,
   Quote,
@@ -41,11 +46,11 @@ import stickerSheetsImage from "./assets/products/sticker-sheets.png";
 import thankYouCardImage from "./assets/products/thank-you-card.png";
 
 const navItems = [
-  "Sticker/Labels",
-  "Packaging",
-  "Cards/Stationery",
-  "Marketing",
-  "Pricing",
+  { label: "Sticker/Labels", href: "/#products" },
+  { label: "Packaging", href: "/#products" },
+  { label: "Cards/Stationery", href: "/#products" },
+  { label: "Marketing", href: "/#products" },
+  { label: "Pricing", href: "/?page=pricing" },
 ];
 
 const tabs = ["Bestseller", "Packaging", "Industries"];
@@ -216,6 +221,111 @@ const brandTags = [
   { label: "Uber", className: "brand-uber" },
 ];
 
+const pricingProductTypes = [
+  {
+    name: "Print Book",
+    image: paperBoxesImage,
+    basePrice: 42,
+    pageRate: 1.15,
+  },
+  {
+    name: "Photo Book",
+    image: businessCardImage,
+    basePrice: 86,
+    pageRate: 2.6,
+  },
+  {
+    name: "Comic Book",
+    image: stickerSheetsImage,
+    basePrice: 64,
+    pageRate: 1.85,
+  },
+  {
+    name: "Magazine",
+    image: thankYouCardImage,
+    basePrice: 38,
+    pageRate: 1.3,
+  },
+  {
+    name: "Yearbook",
+    image: metalStickerImage,
+    basePrice: 112,
+    pageRate: 2.9,
+  },
+  {
+    name: "Calendar",
+    image: roundStickersImage,
+    basePrice: 58,
+    pageRate: 2.1,
+  },
+  {
+    name: "Ebook",
+    image: heroImage,
+    basePrice: 24,
+    pageRate: 0.45,
+  },
+];
+
+const bookSizes = [
+  { label: "5 x 8 in", min: 32, max: 800, multiplier: 1 },
+  { label: "6 x 9 in", min: 32, max: 740, multiplier: 1.12 },
+  { label: "8.5 x 11 in", min: 24, max: 500, multiplier: 1.42 },
+  { label: "A4 Portrait", min: 24, max: 460, multiplier: 1.52 },
+];
+
+const pricingOptions = {
+  binding: [
+    {
+      group: "Paperback Options",
+      items: [
+        { title: "Perfect Bound", image: paperBoxesImage, price: 18 },
+        { title: "Coil Bound", image: courierBagImage, price: 26 },
+        { title: "Saddle Stitch", image: stickerSheetsImage, price: 12 },
+      ],
+    },
+    {
+      group: "Hardcover Options",
+      items: [
+        { title: "Case Wrap", image: printedTapeImage, price: 54 },
+        { title: "Linen Wrap", image: hangTagsImage, price: 68 },
+      ],
+    },
+  ],
+  interior: [
+    { title: "Standard B&W", image: thankYouCardImage, price: 0 },
+    { title: "Premium B&W", image: metalStickerImage, price: 12 },
+    { title: "Standard Color", image: raisedUvImage, price: 28 },
+    { title: "Premium Color", image: heroImage, price: 44 },
+  ],
+  paper: [
+    { title: "60# Uncoated", image: paperBoxesImage, price: 0 },
+    { title: "70# Uncoated", image: courierBagImage, price: 14 },
+    { title: "80# Coated", image: stickerSheetsImage, price: 22 },
+  ],
+  cover: [
+    { title: "Glossy", image: businessCardImage, price: 0 },
+    { title: "Matte", image: thankYouCardImage, price: 9 },
+  ],
+};
+
+const summaryRows = [
+  { key: "size", label: "Book Size" },
+  { key: "pages", label: "Page Count" },
+  { key: "binding", label: "Binding Type" },
+  { key: "interior", label: "Interior Color" },
+  { key: "paper", label: "Paper Type" },
+  { key: "cover", label: "Cover Finish" },
+];
+
+function isPricingPage() {
+  if (typeof window === "undefined") {
+    return false;
+  }
+
+  const params = new URLSearchParams(window.location.search);
+  return params.get("page") === "pricing" || window.location.pathname === "/pricing";
+}
+
 function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
   const closeMenu = () => setMenuOpen(false);
@@ -223,14 +333,14 @@ function Header() {
   return (
     <header className="site-header">
       <div className="header-main">
-        <a className="brand" href="#home" aria-label="Creative Print Arts home">
+        <a className="brand" href="/" aria-label="Creative Print Arts home">
           <img className="brand-logo" src={logoImage} alt="Creative Print Arts" />
         </a>
 
         <nav className="desktop-nav" aria-label="Primary navigation">
           {navItems.map((item) => (
-            <a key={item} href="#products">
-              {item}
+            <a key={item.label} href={item.href}>
+              {item.label}
               <ChevronDown size={15} aria-hidden="true" />
             </a>
           ))}
@@ -261,8 +371,334 @@ function Header() {
         </button>
       </div>
 
-     
+      <div className={`mobile-panel ${menuOpen ? "is-open" : ""}`}>
+        {navItems.map((item) => (
+          <a key={item.label} href={item.href} onClick={closeMenu}>
+            {item.label}
+            <ChevronRight size={18} aria-hidden="true" />
+          </a>
+        ))}
+      </div>
     </header>
+  );
+}
+
+function PricingOptionCard({ option, selected, onSelect }) {
+  return (
+    <button
+      className={`pricing-option-card ${selected ? "is-selected" : ""}`}
+      type="button"
+      onClick={() => onSelect(option)}
+    >
+      <img src={option.image} alt={option.title} />
+      <span>{option.title}</span>
+    </button>
+  );
+}
+
+function PricingAccordion({ title, children }) {
+  const [open, setOpen] = useState(false);
+
+  return (
+    <section className={`pricing-accordion ${open ? "is-open" : ""}`}>
+      <button type="button" onClick={() => setOpen((value) => !value)}>
+        <span>{title}</span>
+        <ChevronDown size={19} aria-hidden="true" />
+      </button>
+      {open ? <div className="pricing-accordion-body">{children}</div> : null}
+    </section>
+  );
+}
+
+function PricingPage() {
+  const [activeProduct, setActiveProduct] = useState(pricingProductTypes[0]);
+  const [bookSize, setBookSize] = useState("");
+  const [pageCount, setPageCount] = useState("");
+  const [binding, setBinding] = useState(null);
+  const [interior, setInterior] = useState(null);
+  const [paper, setPaper] = useState(null);
+  const [cover, setCover] = useState(null);
+  const [retailDistribution, setRetailDistribution] = useState(true);
+
+  const selectedSize = bookSizes.find((size) => size.label === bookSize);
+  const pages = Number(pageCount);
+  const hasValidPageCount =
+    selectedSize && pages >= selectedSize.min && pages <= selectedSize.max;
+  const isReady = Boolean(
+    activeProduct && selectedSize && hasValidPageCount && binding && interior && paper && cover,
+  );
+  const calculatedPrice = isReady
+    ? Math.round(
+        (activeProduct.basePrice +
+          pages * activeProduct.pageRate * selectedSize.multiplier +
+          binding.price +
+          interior.price +
+          paper.price +
+          cover.price +
+          (retailDistribution ? 10 : 0)) *
+          1.18,
+      )
+    : 0;
+  const optionSummary = {
+    size: bookSize,
+    pages: hasValidPageCount ? `${pages} pages` : "",
+    binding: binding?.title,
+    interior: interior?.title,
+    paper: paper?.title,
+    cover: cover?.title,
+  };
+
+  const resetForProduct = (product) => {
+    setActiveProduct(product);
+    setBookSize("");
+    setPageCount("");
+    setBinding(null);
+    setInterior(null);
+    setPaper(null);
+    setCover(null);
+  };
+
+  return (
+    <>
+      <Header />
+      <main className="pricing-page">
+        <section className="pricing-hero" aria-labelledby="pricing-title">
+          <div className="pricing-hero-copy reveal">
+            <h1 id="pricing-title">Pricing Calculator</h1>
+            <p>
+              Calculate printing costs, select product options, estimate retail-ready pricing,
+              and prepare print templates for your custom order.
+            </p>
+          </div>
+
+          <aside className="pricing-help-card reveal" aria-label="Pricing help">
+            <BookOpen size={58} aria-hidden="true" />
+            <div>
+              <p>Need details about product options?</p>
+              <a href="/#products">More about our products</a>
+              <p>Get volume discounts on bulk orders</p>
+              <a href="mailto:arunrawat2004@gmail.com">Contact us</a>
+            </div>
+          </aside>
+        </section>
+
+        <section className="product-type-row" aria-label="Choose a product type">
+          <h2>Choose a product type</h2>
+          <div className="product-type-list">
+            {pricingProductTypes.map((product) => (
+              <button
+                className={`product-type-card ${
+                  product.name === activeProduct.name ? "is-selected" : ""
+                }`}
+                type="button"
+                key={product.name}
+                onClick={() => resetForProduct(product)}
+              >
+                <img src={product.image} alt="" />
+                <span>{product.name}</span>
+              </button>
+            ))}
+          </div>
+        </section>
+
+        <section className="pricing-builder" aria-label={`${activeProduct.name} options`}>
+          <div className="pricing-builder-main">
+            <div className="pricing-title-row">
+              <h2>{activeProduct.name}</h2>
+              <div className="retail-note">
+                <strong>Sell on Retail Sites</strong>
+                <p>
+                  Select product options marked with this icon to enable distribution to retail
+                  partners.
+                </p>
+                <span aria-hidden="true" />
+              </div>
+            </div>
+
+            <section className="pricing-section">
+              <h3>Book Size & Page Count</h3>
+              <div className="pricing-input-grid">
+                <label>
+                  <span>Select Book Size</span>
+                  <select value={bookSize} onChange={(event) => setBookSize(event.target.value)}>
+                    <option value="">Select Book Size</option>
+                    {bookSizes.map((size) => (
+                      <option value={size.label} key={size.label}>
+                        {size.label}
+                      </option>
+                    ))}
+                  </select>
+                </label>
+
+                <label>
+                  <span>Page Count</span>
+                  <input
+                    type="number"
+                    min={selectedSize?.min ?? 1}
+                    max={selectedSize?.max ?? 999}
+                    value={pageCount}
+                    placeholder="Page Count"
+                    onChange={(event) => setPageCount(event.target.value)}
+                  />
+                </label>
+              </div>
+              <p className={`min-max ${pageCount && !hasValidPageCount ? "is-error" : ""}`}>
+                MIN-MAX: {selectedSize ? `${selectedSize.min} - ${selectedSize.max}` : "-"}
+              </p>
+            </section>
+
+            <section className="pricing-section">
+              <div className="section-link-row">
+                <h3>Binding Type</h3>
+                <a href="/#products">More about binding types</a>
+              </div>
+              {pricingOptions.binding.map((group) => (
+                <div className="option-group" key={group.group}>
+                  <h4>{group.group}</h4>
+                  <div className="pricing-card-grid is-three">
+                    {group.items.map((option) => (
+                      <PricingOptionCard
+                        option={option}
+                        selected={binding?.title === option.title}
+                        onSelect={setBinding}
+                        key={option.title}
+                      />
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </section>
+
+            <section className="pricing-section">
+              <div className="section-link-row">
+                <h3>Interior Color</h3>
+                <a href="/#products">More about interior colors</a>
+              </div>
+              <div className="pricing-card-grid is-two">
+                {pricingOptions.interior.map((option) => (
+                  <PricingOptionCard
+                    option={option}
+                    selected={interior?.title === option.title}
+                    onSelect={setInterior}
+                    key={option.title}
+                  />
+                ))}
+              </div>
+            </section>
+
+            <section className="pricing-section">
+              <div className="section-link-row">
+                <h3>Paper Type</h3>
+                <a href="/#products">More about paper types</a>
+              </div>
+              <div className="pricing-card-grid is-three">
+                {pricingOptions.paper.map((option) => (
+                  <PricingOptionCard
+                    option={option}
+                    selected={paper?.title === option.title}
+                    onSelect={setPaper}
+                    key={option.title}
+                  />
+                ))}
+              </div>
+            </section>
+
+            <section className="pricing-section">
+              <div className="section-link-row">
+                <h3>Cover Finish</h3>
+                <a href="/#products">More about cover finishes</a>
+              </div>
+              <div className="pricing-card-grid is-two">
+                {pricingOptions.cover.map((option) => (
+                  <PricingOptionCard
+                    option={option}
+                    selected={cover?.title === option.title}
+                    onSelect={setCover}
+                    key={option.title}
+                  />
+                ))}
+              </div>
+            </section>
+
+            <PricingAccordion title="Revenue Estimates">
+              <p>
+                Estimated retail profit appears after all product options are selected. Current
+                sample margin is Rs.{Math.max(calculatedPrice * 2 - calculatedPrice, 0)} per copy.
+              </p>
+            </PricingAccordion>
+
+            <PricingAccordion title="Quantity & Shipping Estimates">
+              <p>
+                Add quantity and delivery preferences in the next step. Bulk discounts can be
+                prepared for packaging, booklets, catalogs, and marketing prints.
+              </p>
+            </PricingAccordion>
+          </div>
+
+          <aside className="pricing-summary" aria-label="Pricing summary">
+            <div className="summary-book-preview">
+              <div className="book-mockup" aria-hidden="true">
+                <span />
+              </div>
+              <strong>{isReady ? activeProduct.name : "Select all product options"}</strong>
+            </div>
+
+            <label className="retail-toggle">
+              <input
+                type="checkbox"
+                checked={retailDistribution}
+                onChange={(event) => setRetailDistribution(event.target.checked)}
+              />
+              <span aria-hidden="true" />
+              <div>
+                <strong>Retail Distribution</strong>
+                <p>Select all options to check retail eligibility</p>
+              </div>
+            </label>
+
+            <dl className="summary-option-list">
+              {summaryRows.map((row) => (
+                <div className={optionSummary[row.key] ? "is-complete" : ""} key={row.key}>
+                  <dt>{row.label}</dt>
+                  <dd>{optionSummary[row.key] || "Pending"}</dd>
+                </div>
+              ))}
+            </dl>
+
+            <button className="template-button" type="button">
+              <Download size={17} aria-hidden="true" />
+              Book Templates
+            </button>
+            <button className="template-button" type="button">
+              <FileText size={17} aria-hidden="true" />
+              Custom Cover Template
+            </button>
+
+            <div className="summary-price">
+              <strong>{calculatedPrice.toLocaleString("en-IN")}.00</strong>
+              <span>Rs. per {activeProduct.name}</span>
+            </div>
+
+            <button className="create-book-button" type="button" disabled={!isReady}>
+              {isReady ? (
+                <CheckCircle2 size={18} aria-hidden="true" />
+              ) : (
+                <PackageCheck size={18} aria-hidden="true" />
+              )}
+              Create Your {activeProduct.name}
+            </button>
+
+            <p className="summary-helper">
+              <Info size={15} aria-hidden="true" />
+              Price is a frontend estimate and will be confirmed before printing.
+            </p>
+          </aside>
+        </section>
+      </main>
+      <BrandStrip />
+      <Footer />
+      <DiscountButton />
+    </>
   );
 }
 
@@ -506,7 +942,7 @@ function Footer() {
       <div className="footer-column footer-products">
         <h3>Product</h3>
         {productLinks.map((link) => (
-          <a href="#products" key={link}>
+          <a href="/#products" key={link}>
             {link}
           </a>
         ))}
@@ -515,14 +951,14 @@ function Footer() {
       <div className="footer-column footer-support">
         <h3>Support</h3>
         {supportLinks.map((link) => (
-          <a href="#products" key={link}>
+          <a href="/#products" key={link}>
             {link}
           </a>
         ))}
       </div>
 
       <div className="footer-brand-panel">
-        <a className="brand" href="#home" aria-label="Creative Print Arts home">
+        <a className="brand" href="/" aria-label="Creative Print Arts home">
           <img className="brand-logo" src={logoImage} alt="Creative Print Arts" />
         </a>
 
@@ -538,10 +974,10 @@ function Footer() {
         </div>
 
         <div className="social-links" aria-label="Social links">
-          <a href="#home" aria-label="Instagram">
+          <a href="/" aria-label="Instagram">
             <Instagram size={22} aria-hidden="true" />
           </a>
-          <a href="#home" aria-label="Facebook">
+          <a href="/" aria-label="Facebook">
             <Facebook size={22} aria-hidden="true" />
           </a>
         </div>
@@ -555,7 +991,7 @@ function Footer() {
           </span>
         </div>
 
-        <a className="copyright-link" href="#home">
+        <a className="copyright-link" href="/">
           Reserved Copyrights
         </a>
       </div>
@@ -564,6 +1000,10 @@ function Footer() {
 }
 
 export default function PrintingHome() {
+  if (isPricingPage()) {
+    return <PricingPage />;
+  }
+
   return (
     <>
       <Header />
