@@ -602,7 +602,7 @@ function PricingPage() {
                 <h3>Interior Color</h3>
                 <a href="/#products">More about interior colors</a>
               </div>
-              <div className="pricing-card-grid is-interior">
+              <div className="pricing-card-grid is-interior-pair">
                 {pricingOptions.interior.map((option) => (
                   <PricingOptionCard
                     option={option}

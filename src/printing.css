@@ -1328,12 +1328,9 @@ h3 {
   grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
-.pricing-card-grid.is-interior {
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-}
-
-.pricing-card-grid.is-interior .pricing-option-card:nth-child(3) {
-  grid-column: 1;
+.pricing-card-grid.is-interior-pair {
+  grid-template-columns: repeat(2, minmax(0, calc((100% - 32px) / 3)));
+  justify-content: start;
 }
 
 .pricing-card-grid.is-two {
@@ -2396,7 +2393,7 @@ h3 {
 
   .pricing-input-grid,
   .pricing-card-grid.is-three,
-  .pricing-card-grid.is-interior,
+  .pricing-card-grid.is-interior-pair,
   .pricing-card-grid.is-two {
     grid-template-columns: 1fr;
   }
