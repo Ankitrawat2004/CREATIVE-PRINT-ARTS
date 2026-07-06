@@ -50,7 +50,7 @@ const navItems = [
   { label: "Packaging", href: "/#products" },
   { label: "Cards/Stationery", href: "/#products" },
   { label: "Marketing", href: "/#products" },
-  { label: "Pricing", href: "/?page=pricing" },
+  { label: "Pricing", href: "/?page=pricing#pricing" },
 ];
 
 const tabs = ["Bestseller", "Packaging", "Industries"];
@@ -224,43 +224,43 @@ const brandTags = [
 const pricingProductTypes = [
   {
     name: "Print Book",
-    image: paperBoxesImage,
+    visual: "print-book",
     basePrice: 42,
     pageRate: 1.15,
   },
   {
     name: "Photo Book",
-    image: businessCardImage,
+    visual: "photo-book",
     basePrice: 86,
     pageRate: 2.6,
   },
   {
     name: "Comic Book",
-    image: stickerSheetsImage,
+    visual: "comic-book",
     basePrice: 64,
     pageRate: 1.85,
   },
   {
     name: "Magazine",
-    image: thankYouCardImage,
+    visual: "magazine",
     basePrice: 38,
     pageRate: 1.3,
   },
   {
     name: "Yearbook",
-    image: metalStickerImage,
+    visual: "yearbook",
     basePrice: 112,
     pageRate: 2.9,
   },
   {
     name: "Calendar",
-    image: roundStickersImage,
+    visual: "calendar",
     basePrice: 58,
     pageRate: 2.1,
   },
   {
     name: "Ebook",
-    image: heroImage,
+    visual: "ebook",
     basePrice: 24,
     pageRate: 0.45,
   },
@@ -278,33 +278,33 @@ const pricingOptions = {
     {
       group: "Paperback Options",
       items: [
-        { title: "Perfect Bound", image: paperBoxesImage, price: 18 },
-        { title: "Coil Bound", image: courierBagImage, price: 26 },
-        { title: "Saddle Stitch", image: stickerSheetsImage, price: 12 },
+        { title: "Perfect Bound", visual: "perfect", price: 18 },
+        { title: "Coil Bound", visual: "coil", price: 26 },
+        { title: "Saddle Stitch", visual: "saddle", price: 12 },
       ],
     },
     {
       group: "Hardcover Options",
       items: [
-        { title: "Case Wrap", image: printedTapeImage, price: 54 },
-        { title: "Linen Wrap", image: hangTagsImage, price: 68 },
+        { title: "Case Wrap", visual: "case", price: 54 },
+        { title: "Linen Wrap", visual: "linen", price: 68 },
       ],
     },
   ],
   interior: [
-    { title: "Standard B&W", image: thankYouCardImage, price: 0 },
-    { title: "Premium B&W", image: metalStickerImage, price: 12 },
-    { title: "Standard Color", image: raisedUvImage, price: 28 },
-    { title: "Premium Color", image: heroImage, price: 44 },
+    { title: "Standard B&W", visual: "standard-bw", price: 0 },
+    { title: "Premium B&W", visual: "premium-bw", price: 12 },
+    { title: "Standard Color", visual: "standard-color", price: 28 },
+    { title: "Premium Color", visual: "premium-color", price: 44 },
   ],
   paper: [
-    { title: "60# Uncoated", image: paperBoxesImage, price: 0 },
-    { title: "70# Uncoated", image: courierBagImage, price: 14 },
-    { title: "80# Coated", image: stickerSheetsImage, price: 22 },
+    { title: "60# Uncoated", visual: "paper-60", price: 0 },
+    { title: "70# Uncoated", visual: "paper-70", price: 14 },
+    { title: "80# Coated", visual: "paper-80", price: 22 },
   ],
   cover: [
-    { title: "Glossy", image: businessCardImage, price: 0 },
-    { title: "Matte", image: thankYouCardImage, price: 9 },
+    { title: "Glossy", visual: "glossy", price: 0 },
+    { title: "Matte", visual: "matte", price: 9 },
   ],
 };
 
@@ -323,7 +323,11 @@ function isPricingPage() {
   }
 
   const params = new URLSearchParams(window.location.search);
-  return params.get("page") === "pricing" || window.location.pathname === "/pricing";
+  return (
+    params.get("page") === "pricing" ||
+    window.location.pathname === "/pricing" ||
+    window.location.hash === "#pricing"
+  );
 }
 
 function Header() {
@@ -390,7 +394,11 @@ function PricingOptionCard({ option, selected, onSelect }) {
       type="button"
       onClick={() => onSelect(option)}
     >
-      <img src={option.image} alt={option.title} />
+      <span className={`pricing-option-art is-${option.visual}`} aria-hidden="true">
+        <i />
+        <b />
+        <em />
+      </span>
       <span>{option.title}</span>
     </button>
   );
@@ -461,7 +469,7 @@ function PricingPage() {
   return (
     <>
       <Header />
-      <main className="pricing-page">
+      <main className="pricing-page" id="pricing">
         <section className="pricing-hero" aria-labelledby="pricing-title">
           <div className="pricing-hero-copy reveal">
             <h1 id="pricing-title">Pricing Calculator</h1>
@@ -472,7 +480,10 @@ function PricingPage() {
           </div>
 
           <aside className="pricing-help-card reveal" aria-label="Pricing help">
-            <BookOpen size={58} aria-hidden="true" />
+            <span className="mini-book-illo" aria-hidden="true">
+              <i />
+              <b />
+            </span>
             <div>
               <p>Need details about product options?</p>
               <a href="/#products">More about our products</a>
@@ -494,7 +505,7 @@ function PricingPage() {
                 key={product.name}
                 onClick={() => resetForProduct(product)}
               >
-                <img src={product.image} alt="" />
+                <span className={`product-type-art is-${product.visual}`} aria-hidden="true" />
                 <span>{product.name}</span>
               </button>
             ))}

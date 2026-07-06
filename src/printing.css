@@ -896,7 +896,9 @@ h3 {
   grid-template-columns: minmax(0, 1fr) minmax(320px, 410px);
   gap: clamp(28px, 5vw, 80px);
   align-items: end;
-  padding: clamp(68px, 8vw, 116px) clamp(18px, 3.4vw, 44px) clamp(46px, 5vw, 76px);
+  width: min(1260px, calc(100% - 88px));
+  margin: 0 auto;
+  padding: clamp(76px, 8.5vw, 118px) 0 clamp(50px, 5.4vw, 76px);
   background: #ffffff;
 }
 
@@ -930,9 +932,58 @@ h3 {
   background: #fafafa;
 }
 
-.pricing-help-card svg {
-  color: #5a5bd9;
-  stroke-width: 1.7;
+.mini-book-illo {
+  position: relative;
+  display: block;
+  width: 68px;
+  height: 76px;
+}
+
+.mini-book-illo::before,
+.mini-book-illo::after,
+.mini-book-illo i,
+.mini-book-illo b {
+  position: absolute;
+  display: block;
+  content: "";
+}
+
+.mini-book-illo::before {
+  left: 10px;
+  top: 10px;
+  width: 26px;
+  height: 54px;
+  border: 3px solid #34379b;
+  background: #6e6de8;
+  transform: rotate(-26deg) skewY(-5deg);
+}
+
+.mini-book-illo::after {
+  left: 35px;
+  top: 18px;
+  width: 24px;
+  height: 50px;
+  border: 3px solid #34379b;
+  background: #5757d5;
+  transform: rotate(-8deg) skewY(-3deg);
+}
+
+.mini-book-illo i {
+  left: 16px;
+  top: 17px;
+  width: 14px;
+  height: 42px;
+  background: rgba(255, 255, 255, 0.45);
+  transform: rotate(-26deg);
+}
+
+.mini-book-illo b {
+  left: 42px;
+  top: 25px;
+  width: 10px;
+  height: 32px;
+  background: rgba(255, 255, 255, 0.36);
+  transform: rotate(-8deg);
 }
 
 .pricing-help-card p {
@@ -960,7 +1011,7 @@ h3 {
   grid-template-columns: 128px minmax(0, 1fr);
   gap: 20px;
   align-items: center;
-  width: min(1040px, calc(100% - 38px));
+  width: min(1038px, calc(100% - 88px));
   margin: 0 auto;
   padding: 28px 0 36px;
 }
@@ -1009,14 +1060,97 @@ h3 {
   box-shadow: 0 0 0 2px rgba(116, 108, 255, 0.12);
 }
 
-.product-type-card img {
+.product-type-art {
+  position: relative;
+  display: block;
   width: 100%;
   height: 58px;
   border-radius: 4px;
-  object-fit: cover;
+  overflow: hidden;
+  background: #eef0f2;
+  box-shadow: inset 0 0 0 1px rgba(20, 38, 59, 0.03);
 }
 
-.product-type-card span {
+.product-type-art::before,
+.product-type-art::after {
+  position: absolute;
+  content: "";
+}
+
+.product-type-art::before {
+  left: 30px;
+  top: 7px;
+  width: 35px;
+  height: 44px;
+  border-radius: 2px;
+  background: #f2d84e;
+  box-shadow: 0 8px 16px rgba(37, 45, 67, 0.14);
+  transform: rotate(-3deg);
+}
+
+.product-type-art::after {
+  right: 16px;
+  bottom: 6px;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: #9bbd71;
+}
+
+.product-type-art.is-photo-book::before {
+  background: linear-gradient(135deg, #f7f7f7 0 42%, #1e1e1e 43% 100%);
+}
+
+.product-type-art.is-photo-book::after {
+  right: 28px;
+  width: 28px;
+  height: 36px;
+  border-radius: 2px;
+  background: #343434;
+}
+
+.product-type-art.is-comic-book::before {
+  background:
+    radial-gradient(circle at 25% 32%, #f45a48 0 11%, transparent 12%),
+    radial-gradient(circle at 68% 50%, #37a2e3 0 13%, transparent 14%),
+    #f0c94e;
+}
+
+.product-type-art.is-magazine::before {
+  background: linear-gradient(135deg, #20a7d8, #ef7b9b);
+}
+
+.product-type-art.is-yearbook::before {
+  background: linear-gradient(90deg, #bf2e30 0 34%, #2f2f33 35% 100%);
+}
+
+.product-type-art.is-calendar::before {
+  width: 42px;
+  background:
+    linear-gradient(#fff 0 18%, transparent 19%),
+    radial-gradient(circle at 40% 60%, #111 0 10%, transparent 11%),
+    #f7f7f7;
+}
+
+.product-type-art.is-ebook::before {
+  width: 42px;
+  border-radius: 5px;
+  background: #101010;
+  box-shadow:
+    inset 0 0 0 5px #2a2a2a,
+    0 8px 16px rgba(37, 45, 67, 0.16);
+}
+
+.product-type-art.is-ebook::after {
+  right: 41px;
+  bottom: 24px;
+  width: 16px;
+  height: 2px;
+  border-radius: 999px;
+  background: #ffffff;
+}
+
+.product-type-card > span:not(.product-type-art) {
   font-size: 0.92rem;
   font-weight: 500;
   text-align: center;
@@ -1027,7 +1161,9 @@ h3 {
   grid-template-columns: minmax(0, 1fr) 320px;
   gap: clamp(28px, 4vw, 48px);
   align-items: start;
-  padding: 0 clamp(18px, 3.4vw, 44px) clamp(68px, 7vw, 96px);
+  width: min(1260px, calc(100% - 88px));
+  margin: 0 auto;
+  padding: 0 0 clamp(68px, 7vw, 96px);
 }
 
 .pricing-builder-main {
@@ -1240,14 +1376,170 @@ h3 {
   background: rgba(255, 255, 255, 0.12);
 }
 
-.pricing-option-card img {
+.pricing-option-art {
+  position: relative;
+  display: block;
   width: 100%;
   aspect-ratio: 1.74;
   border-radius: 5px;
-  object-fit: cover;
+  overflow: hidden;
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.64), rgba(255, 255, 255, 0.18)),
+    #efeff4;
 }
 
-.pricing-option-card span {
+.pricing-option-art::before,
+.pricing-option-art::after,
+.pricing-option-art i,
+.pricing-option-art b,
+.pricing-option-art em {
+  position: absolute;
+  display: block;
+  content: "";
+}
+
+.pricing-option-art::before {
+  left: 10%;
+  bottom: 18%;
+  width: 70%;
+  height: 44%;
+  border-radius: 4px;
+  background: #ffffff;
+  box-shadow: 0 18px 28px rgba(65, 75, 96, 0.12);
+  transform: skewY(8deg);
+}
+
+.pricing-option-art::after {
+  left: 18%;
+  top: 18%;
+  width: 72%;
+  height: 52%;
+  border-radius: 4px 5px 5px 4px;
+  background: #bdb9f1;
+  transform: skewY(-8deg);
+}
+
+.pricing-option-art i {
+  left: 8%;
+  bottom: 23%;
+  width: 52%;
+  height: 13%;
+  background: repeating-linear-gradient(90deg, #e1e4eb 0 3px, #f6f6f8 3px 7px);
+  transform: skewY(8deg);
+  z-index: 2;
+}
+
+.pricing-option-art b {
+  left: 45%;
+  top: 15%;
+  width: 32%;
+  height: 10%;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.48);
+  transform: rotate(-14deg);
+  z-index: 3;
+}
+
+.pricing-option-art em {
+  left: 22%;
+  top: 24%;
+  width: 36%;
+  height: 42%;
+  border-radius: 2px;
+  background: rgba(255, 255, 255, 0.18);
+  transform: skewY(-8deg);
+  z-index: 3;
+}
+
+.pricing-option-art.is-coil::before {
+  bottom: 14%;
+}
+
+.pricing-option-art.is-coil i {
+  top: 32%;
+  bottom: auto;
+  left: 33%;
+  width: 48%;
+  height: 12%;
+  border-radius: 999px;
+  background: repeating-linear-gradient(90deg, #aeb2bb 0 6px, transparent 6px 12px);
+  transform: rotate(-12deg);
+}
+
+.pricing-option-art.is-saddle::after {
+  border-radius: 0 14px 14px 0;
+  transform: skewY(-7deg) rotate(1deg);
+}
+
+.pricing-option-art.is-case::after,
+.pricing-option-art.is-linen::after {
+  background: #c0bdf2;
+}
+
+.pricing-option-art.is-linen::before {
+  border: 2px solid rgba(206, 211, 220, 0.9);
+}
+
+.pricing-option-art.is-standard-bw::after,
+.pricing-option-art.is-premium-bw::after,
+.pricing-option-art.is-standard-color::after,
+.pricing-option-art.is-premium-color::after {
+  width: 76%;
+  height: 64%;
+  background: #ffffff;
+}
+
+.pricing-option-art.is-standard-bw em,
+.pricing-option-art.is-premium-bw em {
+  background: repeating-linear-gradient(#b6bbc5 0 1px, transparent 1px 8px);
+}
+
+.pricing-option-art.is-premium-bw b {
+  width: 46%;
+  height: 48%;
+  border-radius: 50%;
+  background: repeating-linear-gradient(135deg, #9a9fa9 0 3px, #d8dbe2 3px 6px);
+}
+
+.pricing-option-art.is-standard-color em {
+  background:
+    linear-gradient(135deg, transparent 0 45%, rgba(92, 157, 230, 0.35) 46% 100%),
+    repeating-linear-gradient(#bac0cc 0 1px, transparent 1px 9px);
+}
+
+.pricing-option-art.is-premium-color em {
+  width: 52%;
+  height: 44%;
+  background: linear-gradient(135deg, #80d6f2, #f7c76a 48%, #e06f79);
+}
+
+.pricing-option-art.is-paper-60::after,
+.pricing-option-art.is-paper-70::after,
+.pricing-option-art.is-paper-80::after {
+  top: 28%;
+  height: 28%;
+  background: #ffffff;
+}
+
+.pricing-option-art.is-paper-70 i,
+.pricing-option-art.is-paper-80 i {
+  height: 17%;
+}
+
+.pricing-option-art.is-glossy::after,
+.pricing-option-art.is-matte::after {
+  background: linear-gradient(135deg, #bdf4f2, #f7df9c);
+}
+
+.pricing-option-art.is-glossy b {
+  background: rgba(255, 255, 255, 0.66);
+}
+
+.pricing-option-art.is-matte {
+  filter: saturate(0.8) contrast(0.92);
+}
+
+.pricing-option-card > span:not(.pricing-option-art) {
   position: relative;
   z-index: 1;
   display: block;
@@ -2045,7 +2337,8 @@ h3 {
 
   .pricing-hero {
     gap: 26px;
-    padding: 46px 16px 34px;
+    width: calc(100% - 32px);
+    padding: 46px 0 34px;
   }
 
   .pricing-hero-copy h1 {
@@ -2060,9 +2353,11 @@ h3 {
     border-radius: 10px;
   }
 
-  .pricing-help-card svg {
+  .mini-book-illo {
     width: 44px;
-    height: 44px;
+    height: 50px;
+    transform: scale(0.68);
+    transform-origin: left center;
   }
 
   .product-type-row {
@@ -2076,7 +2371,8 @@ h3 {
   }
 
   .pricing-builder {
-    padding: 0 16px 54px;
+    width: calc(100% - 32px);
+    padding: 0 0 54px;
   }
 
   .pricing-title-row {
