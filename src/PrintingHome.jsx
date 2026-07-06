@@ -688,13 +688,12 @@ function PricingPage() {
 
             <section className="pricing-section feature-step-section">
               <div className="feature-step-heading">
-                <span>6</span>
                 <div>
                   <h3>Designing And Formatting</h3>
                   <p>Rs.1500/- Extra Per Cover Page And Rs.50 Extra Per Inner Page</p>
                 </div>
               </div>
-              <div className="pricing-card-grid is-two feature-pair-grid">
+              <div className="pricing-card-grid feature-pair-grid">
                 {pricingOptions.designing.map((option) => (
                   <FeatureChoiceCard
                     option={option}
@@ -708,7 +707,6 @@ function PricingPage() {
 
             <section className="pricing-section feature-step-section">
               <div className="feature-step-heading">
-                <span>7</span>
                 <div>
                   <h3>ISBN Allocation</h3>
                   <p>It May Take 5 to 7 More Working Days To Deliver.</p>
@@ -718,7 +716,7 @@ function PricingPage() {
                 An International Standard Book Number provides publishing information that gives
                 retailers a way to report your book sales.
               </p>
-              <div className="pricing-card-grid is-two feature-pair-grid">
+              <div className="pricing-card-grid  feature-pair-grid">
                 {pricingOptions.isbn.map((option) => (
                   <FeatureChoiceCard
                     option={option}
@@ -732,7 +730,6 @@ function PricingPage() {
 
             <section className="pricing-section feature-step-section">
               <div className="feature-step-heading">
-                <span>8</span>
                 <div>
                   <h3>Pricing Estimate</h3>
                   <p>

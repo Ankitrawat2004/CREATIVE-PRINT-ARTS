@@ -152,7 +152,7 @@ function Hero() {
           <Sparkles size={18} aria-hidden="true" />
           Digital, branding, web, and print
         </span>
-        <h1>Kraftix Digital</h1>
+        <h1>TEST</h1>
         <p>
           A creative agency crafting bold digital campaigns, polished websites,
           and print-ready brand experiences for businesses ready to stand out.
