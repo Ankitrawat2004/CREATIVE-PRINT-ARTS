@@ -613,7 +613,7 @@ function PricingPage() {
               </p>
             </section>
 
-            <section className="pricing-section">
+            <section className="pricing-section feature-step-section">
               <div className="section-link-row">
                 <h3>Binding Type</h3>
                 <a href="/#products">More about binding types</a>
@@ -635,7 +635,7 @@ function PricingPage() {
               ))}
             </section>
 
-            <section className="pricing-section">
+            <section className="pricing-section feature-step-section">
               <div className="section-link-row">
                 <h3>Interior Color</h3>
                 <a href="/#products">More about interior colors</a>
@@ -652,7 +652,7 @@ function PricingPage() {
               </div>
             </section>
 
-            <section className="pricing-section">
+            <section className="pricing-section feature-step-section">
               <div className="section-link-row">
                 <h3>Paper Type</h3>
                 <a href="/#products">More about paper types</a>
@@ -669,7 +669,7 @@ function PricingPage() {
               </div>
             </section>
 
-            <section className="pricing-section">
+            <section className="pricing-section feature-step-section">
               <div className="section-link-row">
                 <h3>Cover Finish</h3>
                 <a href="/#products">More about cover finishes</a>
