@@ -1,0 +1,14 @@
+node_modules/
+dist/
+
+.env
+.env.*
+
+*.log
+vite-dev.err
+vite-dev.log
+.devserver.err.log
+.devserver.log
+
+.agents/
+.codex/
