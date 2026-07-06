@@ -1237,7 +1237,7 @@ h3 {
 
 .pricing-input-grid {
   display: grid;
-  grid-template-columns: minmax(240px, 520px) 188px;
+  grid-template-columns: minmax(240px, 1fr) 188px;
   gap: 16px;
   align-items: start;
 }
@@ -1246,6 +1246,10 @@ h3 {
   display: grid;
   gap: 8px;
   min-width: 0;
+}
+
+.pricing-input-grid label:first-child {
+  width: min(520px, 100%);
 }
 
 .pricing-input-grid label > span {
