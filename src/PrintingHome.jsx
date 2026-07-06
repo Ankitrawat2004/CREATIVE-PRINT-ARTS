@@ -723,7 +723,6 @@ function PricingPage() {
           </aside>
         </section>
       </main>
-      <BrandStrip />
       <Footer />
       <DiscountButton />
     </>
