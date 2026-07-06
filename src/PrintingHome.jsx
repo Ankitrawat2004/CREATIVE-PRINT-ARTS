@@ -13,13 +13,18 @@ import {
   Lock,
   Mail,
   Menu,
+  Palette,
   Phone,
   Pencil,
   Quote,
+  RefreshCw,
   Search,
+  ShieldCheck,
   ShoppingCart,
   Star,
   Settings,
+  Sparkles,
+  Tags,
   Upload,
   UserCircle,
   Wallet,
@@ -156,6 +161,65 @@ const printSteps = [
   },
 ];
 
+const companyThemes = [
+  {
+    company: "Urban Cart",
+    category: "Ecommerce packaging",
+    accent: "#00836f",
+    soft: "#e4f5f1",
+    summary: "A clean green packing setup for daily shipping, return labels, and thank-you inserts.",
+    features: [
+      "Courier bags with brand mark",
+      "Thank-you cards for repeat orders",
+      "Transparent tape for box sealing",
+    ],
+    bestFor: "Online stores",
+    products: "Bags, tape, stickers",
+  },
+  {
+    company: "Cafe Bloom",
+    category: "Food & beverage labels",
+    accent: "#ee7c13",
+    soft: "#fff1df",
+    summary: "Warm label styling for jars, cups, snack boxes, and delivery packaging.",
+    features: [
+      "Food-safe label look",
+      "Round stickers for jars and cups",
+      "Soft color cards for parcel inserts",
+    ],
+    bestFor: "Cafes and bakeries",
+    products: "Labels, cards, boxes",
+  },
+  {
+    company: "Glow Studio",
+    category: "Beauty brand printing",
+    accent: "#d63d8f",
+    soft: "#fdeaf5",
+    summary: "Premium sticker and box theme for cosmetics, skincare kits, and boutique packaging.",
+    features: [
+      "Luxury sticker finish",
+      "Compact box branding",
+      "Color-matched packaging set",
+    ],
+    bestFor: "Cosmetics",
+    products: "Boxes, labels, UV stickers",
+  },
+  {
+    company: "TechNova",
+    category: "Startup event kit",
+    accent: "#2168bd",
+    soft: "#e8f4ff",
+    summary: "Sharp print identity for events, launch packs, laptop stickers, and business cards.",
+    features: [
+      "Sticker sheets for events",
+      "Business cards for sales teams",
+      "Keychains and merch add-ons",
+    ],
+    bestFor: "Startups",
+    products: "Cards, sheets, keychains",
+  },
+];
+
 const reviews = [
   {
     name: "Aarav Kapoor",
@@ -215,6 +279,18 @@ const brandTags = [
   { label: "R", className: "brand-reliance" },
   { label: "Uber", className: "brand-uber" },
 ];
+
+function formatThemeTimestamp(date) {
+  return date.toLocaleString("en-IN", {
+    day: "2-digit",
+    month: "short",
+    year: "numeric",
+    hour: "2-digit",
+    minute: "2-digit",
+    second: "2-digit",
+    hour12: true,
+  });
+}
 
 function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -351,6 +427,94 @@ function PrintProcessSection() {
             <Lock size={25} aria-hidden="true" />
           </span>
           <p>Your Files are Secure, After Printing Files will be Deleted</p>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function CompanyThemeSection() {
+  const [activeThemeIndex, setActiveThemeIndex] = useState(0);
+  const [themeTimestamp, setThemeTimestamp] = useState(() =>
+    formatThemeTimestamp(new Date())
+  );
+  const activeTheme = companyThemes[activeThemeIndex];
+
+  useEffect(() => {
+    const timer = window.setInterval(() => {
+      setActiveThemeIndex((index) => (index + 1) % companyThemes.length);
+      setThemeTimestamp(formatThemeTimestamp(new Date()));
+    }, 6000);
+
+    return () => window.clearInterval(timer);
+  }, []);
+
+  const selectTheme = (index) => {
+    setActiveThemeIndex(index);
+    setThemeTimestamp(formatThemeTimestamp(new Date()));
+  };
+
+  return (
+    <section
+      className="company-theme"
+      style={{ "--theme-accent": activeTheme.accent, "--theme-soft": activeTheme.soft }}
+      aria-label="Dynamic company theme"
+    >
+      <div className="company-theme-inner">
+        <div className="company-theme-copy reveal">
+          <span className="section-kicker">Dynamic company theme</span>
+          <h2>{activeTheme.company}</h2>
+          <p>{activeTheme.summary}</p>
+
+          <div className="theme-meta-row">
+            <span>
+              <RefreshCw size={17} aria-hidden="true" />
+              Auto changes every 6 sec
+            </span>
+            <time>{themeTimestamp}</time>
+          </div>
+        </div>
+
+        <div className="theme-panel reveal">
+          <div className="theme-panel-head">
+            <span>
+              <Palette size={20} aria-hidden="true" />
+              {activeTheme.category}
+            </span>
+            <strong>{activeTheme.bestFor}</strong>
+          </div>
+
+          <div className="theme-feature-grid">
+            {activeTheme.features.map((feature, index) => {
+              const Icon = [Sparkles, ShieldCheck, Tags][index];
+              return (
+                <article className="theme-feature" key={feature}>
+                  <span>
+                    <Icon size={20} aria-hidden="true" />
+                  </span>
+                  <p>{feature}</p>
+                </article>
+              );
+            })}
+          </div>
+
+          <div className="theme-product-bar">
+            <span>Suggested print kit</span>
+            <strong>{activeTheme.products}</strong>
+          </div>
+
+          <div className="theme-tabs" aria-label="Choose company theme">
+            {companyThemes.map((theme, index) => (
+              <button
+                className={index === activeThemeIndex ? "is-active" : ""}
+                type="button"
+                key={theme.company}
+                onClick={() => selectTheme(index)}
+              >
+                {theme.company}
+              </button>
+            ))}
+          </div>
         </div>
       </div>
     </section>
@@ -572,6 +736,7 @@ export default function PrintingHome() {
         <CategoryTabs />
         <Products />
         <PrintProcessSection />
+        <CompanyThemeSection />
         <Reviews />
       </main>
       <BrandStrip />

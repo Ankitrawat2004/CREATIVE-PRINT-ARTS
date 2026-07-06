@@ -630,6 +630,183 @@ h3 {
   line-height: 1.45;
 }
 
+.company-theme {
+  padding: clamp(56px, 7vw, 92px) clamp(16px, 4.2vw, 56px);
+  background:
+    linear-gradient(135deg, var(--theme-soft), #ffffff 48%, #f8fafc),
+    #ffffff;
+}
+
+.company-theme-inner {
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(360px, 1.1fr);
+  gap: clamp(26px, 5vw, 70px);
+  align-items: center;
+  width: min(1120px, 100%);
+  margin: 0 auto;
+}
+
+.company-theme-copy h2 {
+  margin-bottom: 14px;
+  color: #1f252b;
+}
+
+.company-theme-copy p {
+  max-width: 560px;
+  margin-bottom: 26px;
+  color: #52606c;
+  font-size: 1.05rem;
+  line-height: 1.75;
+}
+
+.theme-meta-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+}
+
+.theme-meta-row span,
+.theme-meta-row time {
+  display: inline-flex;
+  min-height: 38px;
+  align-items: center;
+  gap: 8px;
+  padding: 0 12px;
+  border: 1px solid color-mix(in srgb, var(--theme-accent) 22%, #ffffff);
+  border-radius: 999px;
+  color: #35414c;
+  background: rgba(255, 255, 255, 0.72);
+  font-size: 0.86rem;
+  font-weight: 600;
+}
+
+.theme-meta-row span svg {
+  color: var(--theme-accent);
+}
+
+.theme-panel {
+  border: 1px solid color-mix(in srgb, var(--theme-accent) 24%, #ffffff);
+  border-radius: 8px;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.94);
+  box-shadow: 0 20px 45px rgba(24, 53, 78, 0.1);
+}
+
+.theme-panel-head {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: center;
+  justify-content: space-between;
+  padding: 22px 24px;
+  border-bottom: 1px solid #edf1f4;
+}
+
+.theme-panel-head span {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--theme-accent);
+  font-size: 0.95rem;
+  font-weight: 700;
+}
+
+.theme-panel-head strong {
+  color: #1f252b;
+  font-size: 0.92rem;
+  font-weight: 700;
+}
+
+.theme-feature-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+  padding: 24px;
+}
+
+.theme-feature {
+  display: grid;
+  gap: 14px;
+  min-height: 142px;
+  align-content: start;
+  padding: 18px;
+  border: 1px solid #e4ebf0;
+  border-radius: 8px;
+  background: #ffffff;
+}
+
+.theme-feature span {
+  display: grid;
+  width: 38px;
+  height: 38px;
+  place-items: center;
+  border-radius: 8px;
+  color: var(--theme-accent);
+  background: var(--theme-soft);
+}
+
+.theme-feature p {
+  margin-bottom: 0;
+  color: #35414c;
+  font-size: 0.94rem;
+  font-weight: 600;
+  line-height: 1.5;
+}
+
+.theme-product-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0 24px 24px;
+  padding: 16px;
+  border-radius: 8px;
+  color: #ffffff;
+  background: var(--theme-accent);
+}
+
+.theme-product-bar span {
+  font-size: 0.82rem;
+  font-weight: 600;
+  opacity: 0.9;
+}
+
+.theme-product-bar strong {
+  font-size: 0.96rem;
+  font-weight: 700;
+}
+
+.theme-tabs {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0;
+  border-top: 1px solid #edf1f4;
+}
+
+.theme-tabs button {
+  min-width: 0;
+  min-height: 52px;
+  padding: 0 10px;
+  border: 0;
+  border-right: 1px solid #edf1f4;
+  color: #60707f;
+  background: #ffffff;
+  font-size: 0.82rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.theme-tabs button:last-child {
+  border-right: 0;
+}
+
+.theme-tabs button.is-active {
+  color: #ffffff;
+  background: var(--theme-accent);
+}
+
 .reviews {
   background: #f8fafc;
 }
@@ -1206,6 +1383,14 @@ h3 {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
+  .company-theme-inner {
+    grid-template-columns: 1fr;
+  }
+
+  .theme-feature-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
   .review-list {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
@@ -1354,6 +1539,37 @@ h3 {
   .review-list {
     grid-template-columns: 1fr;
     width: min(430px, calc(100% - 28px));
+  }
+
+  .company-theme {
+    padding: 46px 16px;
+  }
+
+  .company-theme-inner {
+    width: min(430px, 100%);
+  }
+
+  .theme-panel-head,
+  .theme-product-bar {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .theme-feature-grid {
+    grid-template-columns: 1fr;
+    padding: 18px;
+  }
+
+  .theme-feature {
+    min-height: auto;
+  }
+
+  .theme-tabs {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .theme-tabs button:nth-child(2) {
+    border-right: 0;
   }
 
   .service-highlights {
