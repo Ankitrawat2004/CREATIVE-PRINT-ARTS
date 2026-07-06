@@ -26,6 +26,7 @@ import {
   X,
 } from "lucide-react";
 import heroImage from "./assets/images/printing-hero.png";
+import logoImage from "./assets/images/creative-print-art-logo.png";
 import businessCardImage from "./assets/products/business-card.png";
 import courierBagImage from "./assets/products/courier-bag.png";
 import hangTagsImage from "./assets/products/hang-tags.png";
@@ -44,8 +45,7 @@ const navItems = [
   "Packaging",
   "Cards/Stationery",
   "Marketing",
-  "B2B Pricing",
-  "Industry",
+  "Pricing",
 ];
 
 const tabs = ["Bestseller", "Packaging", "Industries"];
@@ -223,8 +223,8 @@ function Header() {
   return (
     <header className="site-header">
       <div className="header-main">
-        <a className="brand" href="#home" aria-label="Kraftix Digital home">
-          kraftix digital<span>.</span>
+        <a className="brand" href="#home" aria-label="Creative Print Arts home">
+          <img className="brand-logo" src={logoImage} alt="Creative Print Arts" />
         </a>
 
         <nav className="desktop-nav" aria-label="Primary navigation">
@@ -261,21 +261,7 @@ function Header() {
         </button>
       </div>
 
-      <div className="header-subnav">
-        <a href="#products">
-          Ready To Buy
-          <ChevronDown size={15} aria-hidden="true" />
-        </a>
-      </div>
-
-      <div className={`mobile-panel ${menuOpen ? "is-open" : ""}`}>
-        {[...navItems, "Ready To Buy"].map((item) => (
-          <a key={item} href="#products" onClick={closeMenu}>
-            {item}
-            <ChevronRight size={18} aria-hidden="true" />
-          </a>
-        ))}
-      </div>
+     
     </header>
   );
 }
@@ -536,18 +522,18 @@ function Footer() {
       </div>
 
       <div className="footer-brand-panel">
-        <a className="brand" href="#home" aria-label="Kraftix Digital home">
-          kraftix digital<span>.</span>
+        <a className="brand" href="#home" aria-label="Creative Print Arts home">
+          <img className="brand-logo" src={logoImage} alt="Creative Print Arts" />
         </a>
 
         <div className="footer-contact-list">
           <a href="mailto:business@kraftix.in">
             <Mail size={22} aria-hidden="true" />
-            business@kraftix.in
+            arunrawat2004@gmail.com
           </a>
           <a href="tel:+919836766662">
             <Phone size={22} aria-hidden="true" />
-            +919836766662
+            +919871081398
           </a>
         </div>
 

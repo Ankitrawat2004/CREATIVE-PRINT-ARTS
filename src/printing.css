@@ -89,18 +89,16 @@ img {
 
 .brand {
   display: inline-flex;
-  align-items: baseline;
-  gap: 1px;
+  align-items: center;
   min-width: 0;
   color: #15191d;
-  font-size: clamp(1.28rem, 2vw, 1.58rem);
-  font-weight: 600;
-  letter-spacing: 0;
-  white-space: nowrap;
+  line-height: 1;
 }
 
-.brand span {
-  color: var(--orange);
+.brand-logo {
+  width: clamp(154px, 15vw, 190px);
+  height: auto;
+  object-fit: contain;
 }
 
 .desktop-nav {
@@ -1071,7 +1069,11 @@ h3 {
 }
 
 .footer-brand-panel .brand {
-  font-size: clamp(1.9rem, 3vw, 2.25rem);
+  justify-self: start;
+}
+
+.footer-brand-panel .brand-logo {
+  width: clamp(190px, 18vw, 240px);
 }
 
 .footer-contact-list {
@@ -1233,7 +1235,11 @@ h3 {
   }
 
   .brand {
-    font-size: 1.18rem;
+    max-width: 168px;
+  }
+
+  .brand-logo {
+    width: 150px;
   }
 
   .mobile-panel {
