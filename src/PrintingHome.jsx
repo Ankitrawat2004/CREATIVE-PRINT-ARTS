@@ -623,13 +623,13 @@ function PricingPage() {
 
             <section className="pricing-section feature-step-section">
               <div className="section-link-row">
+                 <StepBadge number={1} />
                 <h3>Binding Type</h3>
                 <a href="/#products">More about binding types</a>
               </div>
               {pricingOptions.binding.map((group, index) => (
                 <div className="option-group" key={group.group}>
                   <div className="numbered-option-heading">
-                    <StepBadge number={index + 1} />
                     <h4>{group.group}</h4>
                   </div>
                   <div className="pricing-card-grid is-three">
@@ -649,7 +649,7 @@ function PricingPage() {
             <section className="pricing-section feature-step-section">
               <div className="section-link-row">
                 <div className="numbered-section-title">
-                  <StepBadge number={3} />
+                  <StepBadge number={2} />
                   <h3>Interior Color</h3>
                 </div>
                 <a href="/#products">More about interior colors</a>
@@ -669,7 +669,7 @@ function PricingPage() {
             <section className="pricing-section feature-step-section">
               <div className="section-link-row">
                 <div className="numbered-section-title">
-                  <StepBadge number={4} />
+                  <StepBadge number={3} />
                   <h3>Paper Type</h3>
                 </div>
                 <a href="/#products">More about paper types</a>
@@ -689,7 +689,7 @@ function PricingPage() {
             <section className="pricing-section feature-step-section">
               <div className="section-link-row">
                 <div className="numbered-section-title">
-                  <StepBadge number={5} />
+                  <StepBadge number={4} />
                   <h3>Cover Finish</h3>
                 </div>
                 <a href="/#products">More about cover finishes</a>
@@ -708,7 +708,7 @@ function PricingPage() {
 
             <section className="pricing-section feature-step-section">
               <div className="feature-step-heading">
-                <StepBadge number={6} />
+                <StepBadge number={5} />
                 <div>
                   <h3>Designing And Formatting</h3>
                   <p>Rs.1500/- Extra Per Cover Page And Rs.50 Extra Per Inner Page</p>
@@ -728,7 +728,7 @@ function PricingPage() {
 
             <section className="pricing-section feature-step-section">
               <div className="feature-step-heading">
-                <StepBadge number={7} />
+                <StepBadge number={6} />
                 <div>
                   <h3>ISBN Allocation</h3>
                   <p>It May Take 5 to 7 More Working Days To Deliver.</p>
@@ -752,7 +752,7 @@ function PricingPage() {
 
             <section className="pricing-section feature-step-section">
               <div className="feature-step-heading">
-                <StepBadge number={8} />
+                <StepBadge number={7} />
                 <div>
                   <h3>Pricing Estimate</h3>
                   <p>
