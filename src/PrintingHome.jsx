@@ -322,6 +322,7 @@ const pricingOptions = {
     { title: "60# Uncoated", image: paper60Image, price: 0 },
     { title: "70# Uncoated", image: paper70Image, price: 14 },
     { title: "80# Coated", image: paper80Image, price: 22 },
+    { title: "100# Coated", image: paper80Image, price: 34 },
   ],
   cover: [
     { title: "Glossy", image: coverGlossyImage, price: 0 },
@@ -676,7 +677,7 @@ function PricingPage() {
                 </div>
                 <a href="/#products">More about paper types</a>
               </div>
-              <div className="pricing-card-grid is-three">
+              <div className="pricing-card-grid is-four">
                 {pricingOptions.paper.map((option) => (
                   <PricingOptionCard
                     option={option}
