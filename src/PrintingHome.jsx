@@ -623,9 +623,12 @@ function PricingPage() {
 
             <section className="pricing-section feature-step-section">
               <div className="section-link-row">
-                 <StepBadge number={1} />
-                <h3>Binding Type</h3>
-                <a href="/#products">More about binding types</a>
+                <div className="numbered-section-title">
+                  <StepBadge number={1} />
+                  <h3>Binding Type</h3>
+                  <a href="/#products">More about binding types</a>
+                </div>
+               
               </div>
               {pricingOptions.binding.map((group, index) => (
                 <div className="option-group" key={group.group}>
