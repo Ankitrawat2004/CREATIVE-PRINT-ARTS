@@ -1903,29 +1903,40 @@ h3 {
 
 .summary-option-list {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 14px 22px;
-  margin: 18px 0 6px;
+  grid-template-columns: 1fr;
+  gap: 10px;
+  margin: 16px 0 6px;
 }
 
 .summary-option-list div {
+  display: flex;
+  min-height: 24px;
   min-width: 0;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
 }
 
 .summary-option-list dt {
-  margin-bottom: 6px;
+  min-width: 0;
+  margin-bottom: 0;
+  overflow: hidden;
   color: #45566a;
-  font-size: 0.78rem;
+  font-size: 0.74rem;
   font-weight: 500;
+  text-overflow: ellipsis;
   text-transform: uppercase;
+  white-space: nowrap;
 }
 
 .summary-option-list dd {
+  flex: 0 0 auto;
   margin: 0;
   overflow: hidden;
   color: #a0a7b0;
-  font-size: 0.78rem;
+  font-size: 0.74rem;
   font-weight: 500;
+  text-align: right;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
