@@ -1,17 +1,20 @@
 :root {
-  --ink: #1f252b;
-  --muted: #626b76;
-  --paper: #f5f6f8;
+  --ink: #172231;
+  --muted: #5f6d7c;
+  --paper: #f6fbff;
   --surface: #ffffff;
-  --line: #e2e7ec;
-  --blue: #dff1ff;
-  --blue-dark: #0d5d97;
-  --blue-soft: #e8f4ff;
+  --surface-soft: #fbfdff;
+  --line: #dfeaf2;
+  --blue: #e4f5ff;
+  --blue-dark: #15699f;
+  --blue-soft: #eef8ff;
   --orange: #ee7c13;
   --orange-dark: #d76400;
-  --teal: #007c72;
-  --green: #00836f;
-  --shadow: 0 18px 46px rgba(29, 49, 73, 0.12);
+  --teal: #007d77;
+  --green: #008b78;
+  --shadow-soft: 0 10px 24px rgba(22, 55, 84, 0.07);
+  --shadow: 0 18px 46px rgba(22, 55, 84, 0.12);
+  --shadow-hover: 0 24px 58px rgba(22, 55, 84, 0.17);
   font-family:
     Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
     sans-serif;
@@ -29,7 +32,9 @@ body {
   margin: 0;
   min-width: 320px;
   color: var(--ink);
-  background: var(--paper);
+  background:
+    linear-gradient(180deg, #ffffff 0%, var(--paper) 48%, #ffffff 100%),
+    var(--paper);
 }
 
 body,
@@ -53,9 +58,9 @@ img {
   top: 0;
   z-index: 50;
   color: var(--ink);
-  background: rgba(255, 255, 255, 0.96);
+  background: rgba(255, 255, 255, 0.94);
   border-bottom: 1px solid var(--line);
-  box-shadow: 0 10px 30px rgba(31, 37, 43, 0.05);
+  box-shadow: 0 12px 34px rgba(22, 55, 84, 0.08);
   backdrop-filter: blur(18px);
 }
 
@@ -135,11 +140,17 @@ img {
   place-items: center;
   border-radius: 8px;
   color: var(--green);
+  transition:
+    background 160ms ease,
+    box-shadow 160ms ease,
+    transform 160ms ease;
 }
 
 .icon-button:hover,
 .icon-button:focus-visible {
   background: var(--blue-soft);
+  box-shadow: var(--shadow-soft);
+  transform: translateY(-1px);
 }
 
 .cart-button span {
@@ -293,20 +304,21 @@ h3 {
 
 .primary-button {
   color: #ffffff;
-  background: linear-gradient(180deg, #72b8ef, #318ed7);
-  box-shadow: 0 16px 28px rgba(0, 55, 102, 0.18);
+  background: linear-gradient(180deg, #78c5f4, #2f91d8);
+  box-shadow: 0 16px 32px rgba(21, 105, 159, 0.22);
 }
 
 .secondary-button {
   color: #ffffff;
   background: linear-gradient(180deg, #ff9a25, var(--orange));
-  box-shadow: 0 16px 28px rgba(149, 74, 0, 0.2);
+  box-shadow: 0 16px 32px rgba(149, 74, 0, 0.18);
 }
 
 .outline-button {
   border: 1px solid #cbd6df;
   color: var(--blue-dark);
   background: #ffffff;
+  box-shadow: var(--shadow-soft);
 }
 
 .primary-button:hover,
@@ -315,6 +327,7 @@ h3 {
 .secondary-button:focus-visible,
 .outline-button:hover,
 .outline-button:focus-visible {
+  box-shadow: var(--shadow);
   transform: translateY(-2px);
 }
 
@@ -341,8 +354,8 @@ h3 {
   justify-content: center;
   gap: clamp(22px, 5vw, 70px);
   padding: 0 18px;
-  border-bottom: 1px solid #dce3e8;
-  background: #f0f1f3;
+  border-bottom: 1px solid var(--line);
+  background: #f3f9fd;
 }
 
 .category-tabs a {
@@ -409,7 +422,7 @@ h3 {
 .products {
   padding-top: clamp(32px, 4vw, 58px);
   padding-bottom: clamp(58px, 6.5vw, 88px);
-  background: var(--paper);
+  background: linear-gradient(180deg, var(--paper), #ffffff);
 }
 
 .product-grid {
@@ -422,20 +435,27 @@ h3 {
 
 .product-card {
   min-width: 0;
-  background: transparent;
+  padding: 12px;
+  border: 1px solid rgba(223, 234, 242, 0.9);
+  border-radius: 12px;
+  background: var(--surface);
+  box-shadow: var(--shadow-soft);
   transition:
     transform 180ms ease,
-    box-shadow 180ms ease;
+    box-shadow 180ms ease,
+    border-color 180ms ease;
 }
 
 .product-card:hover {
-  transform: translateY(-3px);
+  border-color: #cfe1ef;
+  box-shadow: var(--shadow);
+  transform: translateY(-5px);
 }
 
 .product-image {
   width: 100%;
   aspect-ratio: 1.13;
-  border-radius: 4px;
+  border-radius: 9px;
   object-fit: cover;
   background: #f1f1f1;
 }
@@ -492,7 +512,22 @@ h3 {
   justify-items: center;
   gap: 22px;
   min-width: 0;
+  padding: 26px 18px;
+  border: 1px solid rgba(223, 234, 242, 0.9);
+  border-radius: 12px;
+  background: var(--surface);
+  box-shadow: var(--shadow-soft);
   text-align: center;
+  transition:
+    border-color 180ms ease,
+    box-shadow 180ms ease,
+    transform 180ms ease;
+}
+
+.service-highlight:hover {
+  border-color: #cfe1ef;
+  box-shadow: var(--shadow);
+  transform: translateY(-4px);
 }
 
 .highlight-icon {
@@ -541,7 +576,7 @@ h3 {
 
 .easy-steps {
   padding-top: clamp(30px, 3.4vw, 42px);
-  background: #f6f6f6;
+  background: #f7fbff;
   text-align: center;
 }
 
@@ -608,7 +643,8 @@ h3 {
   gap: 10px;
   margin-top: clamp(36px, 5vw, 50px);
   padding: 14px 16px;
-  background: #eeeeee;
+  background: #eef7fc;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.8);
 }
 
 .secure-note span {
@@ -631,7 +667,7 @@ h3 {
 }
 
 .reviews {
-  background: #f8fafc;
+  background: linear-gradient(180deg, #f8fcff, #ffffff);
 }
 
 .review-headline {
@@ -663,7 +699,15 @@ h3 {
   border: 1px solid #dbe4eb;
   border-radius: 8px;
   background: #ffffff;
-  box-shadow: 0 12px 28px rgba(24, 53, 78, 0.07);
+  box-shadow: var(--shadow-soft);
+  transition:
+    box-shadow 180ms ease,
+    transform 180ms ease;
+}
+
+.review-score:hover {
+  box-shadow: var(--shadow);
+  transform: translateY(-3px);
 }
 
 .review-score strong {
@@ -710,6 +754,7 @@ h3 {
   cursor: pointer;
   transition:
     transform 180ms ease,
+    box-shadow 180ms ease,
     border-color 180ms ease,
     color 180ms ease;
 }
@@ -718,6 +763,7 @@ h3 {
 .review-nav:focus-visible {
   border-color: var(--green);
   color: var(--green);
+  box-shadow: var(--shadow-soft);
   transform: translateY(-2px);
 }
 
@@ -726,10 +772,18 @@ h3 {
   min-height: 320px;
   padding: clamp(24px, 3vw, 38px);
   border: 1px solid #dbe4eb;
-  border-radius: 8px;
+  border-radius: 12px;
   overflow: hidden;
   background: #ffffff;
-  box-shadow: 0 18px 40px rgba(24, 53, 78, 0.1);
+  box-shadow: var(--shadow);
+  transition:
+    box-shadow 180ms ease,
+    transform 180ms ease;
+}
+
+.review-card:hover {
+  box-shadow: var(--shadow-hover);
+  transform: translateY(-3px);
 }
 
 .review-card::before {
@@ -831,12 +885,24 @@ h3 {
   min-width: 0;
   padding: 14px 14px 16px;
   border: 1px solid #dbe4eb;
-  border-radius: 8px;
+  border-radius: 10px;
   overflow: hidden;
   color: #46525e;
   background: #ffffff;
   text-align: left;
   cursor: pointer;
+  box-shadow: 0 8px 18px rgba(22, 55, 84, 0.04);
+  transition:
+    border-color 160ms ease,
+    box-shadow 160ms ease,
+    transform 160ms ease;
+}
+
+.review-pill:hover,
+.review-pill:focus-visible {
+  border-color: #bcd4e5;
+  box-shadow: var(--shadow-soft);
+  transform: translateY(-2px);
 }
 
 .review-pill span,
@@ -890,7 +956,7 @@ h3 {
 .pricing-page {
   --pricing-wide-width: min(2080px, calc(100% - clamp(32px, 4vw, 112px)));
 
-  background: #ffffff;
+  background: linear-gradient(180deg, #ffffff 0%, #f7fbff 42%, #ffffff 100%);
 }
 
 .pricing-hero {
@@ -931,7 +997,17 @@ h3 {
   min-height: 160px;
   padding: 28px 26px;
   border-radius: 16px;
-  background: #fafafa;
+  border: 1px solid rgba(223, 234, 242, 0.9);
+  background: var(--surface);
+  box-shadow: var(--shadow-soft);
+  transition:
+    box-shadow 180ms ease,
+    transform 180ms ease;
+}
+
+.pricing-help-card:hover {
+  box-shadow: var(--shadow);
+  transform: translateY(-3px);
 }
 
 .mini-book-illo {
@@ -1040,10 +1116,11 @@ h3 {
   justify-items: center;
   min-height: 114px;
   padding: 10px;
-  border: 1px solid transparent;
-  border-radius: 6px;
+  border: 1px solid rgba(223, 234, 242, 0.9);
+  border-radius: 10px;
   color: #10253d;
-  background: #fafafa;
+  background: var(--surface);
+  box-shadow: 0 8px 18px rgba(22, 55, 84, 0.04);
   cursor: pointer;
   transition:
     border-color 160ms ease,
@@ -1053,6 +1130,8 @@ h3 {
 
 .product-type-card:hover,
 .product-type-card:focus-visible {
+  border-color: #cfe1ef;
+  box-shadow: var(--shadow-soft);
   transform: translateY(-2px);
 }
 
@@ -1195,7 +1274,17 @@ h3 {
   position: relative;
   padding: 26px 84px 26px 26px;
   border-radius: 18px;
-  background: #fafafa;
+  border: 1px solid rgba(223, 234, 242, 0.9);
+  background: var(--surface);
+  box-shadow: var(--shadow-soft);
+  transition:
+    box-shadow 180ms ease,
+    transform 180ms ease;
+}
+
+.retail-note:hover {
+  box-shadow: var(--shadow);
+  transform: translateY(-2px);
 }
 
 .retail-note strong {
@@ -1252,7 +1341,7 @@ h3 {
 }
 
 .pricing-input-grid label:first-child {
-  width: min(540px, 100%);
+  width: min(580px, 100%);
 }
 
 .pricing-input-grid label > span {
@@ -1271,13 +1360,25 @@ h3 {
   border-radius: 7px;
   color: #34475b;
   background: #ffffff;
+  box-shadow: 0 7px 16px rgba(22, 55, 84, 0.04);
   font-size: 0.95rem;
   font-weight: 400;
+  transition:
+    border-color 160ms ease,
+    box-shadow 160ms ease,
+    transform 160ms ease;
+}
+
+.pricing-input-grid select:hover,
+.pricing-input-grid input:hover {
+  border-color: #4e83e8;
+  box-shadow: var(--shadow-soft);
 }
 
 .pricing-input-grid select:focus,
 .pricing-input-grid input:focus {
   border-color: #5d7de8;
+  box-shadow: 0 12px 24px rgba(78, 131, 232, 0.12);
   outline: 3px solid rgba(93, 125, 232, 0.14);
 }
 
@@ -1675,6 +1776,11 @@ h3 {
 .estimate-form {
   display: grid;
   gap: 12px;
+  padding: 18px;
+  border: 1px solid rgba(223, 234, 242, 0.9);
+  border-radius: 12px;
+  background: var(--surface);
+  box-shadow: var(--shadow-soft);
 }
 
 .estimate-form label {
@@ -1704,6 +1810,16 @@ h3 {
   font-weight: 700;
   text-transform: uppercase;
   cursor: pointer;
+  box-shadow: 0 12px 24px rgba(47, 125, 244, 0.2);
+  transition:
+    box-shadow 160ms ease,
+    transform 160ms ease;
+}
+
+.estimate-form button:hover,
+.estimate-form button:focus-visible {
+  box-shadow: 0 18px 32px rgba(47, 125, 244, 0.26);
+  transform: translateY(-2px);
 }
 
 .estimate-form p,
@@ -1717,9 +1833,10 @@ h3 {
 .discount-table {
   display: grid;
   border: 1px solid #d8dee7;
-  border-radius: 6px;
+  border-radius: 12px;
   overflow: hidden;
   background: #ffffff;
+  box-shadow: var(--shadow-soft);
 }
 
 .discount-table h4 {
@@ -1774,6 +1891,9 @@ h3 {
 
 .pricing-accordion {
   border-top: 1px solid #eef1f5;
+  transition:
+    background 160ms ease,
+    box-shadow 160ms ease;
 }
 
 .pricing-accordion button {
@@ -1789,6 +1909,11 @@ h3 {
   cursor: pointer;
   font-size: 1.1rem;
   font-weight: 600;
+}
+
+.pricing-accordion:hover {
+  background: rgba(247, 251, 255, 0.75);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.9);
 }
 
 .pricing-accordion.is-open button svg {
@@ -1813,7 +1938,17 @@ h3 {
   gap: 20px;
   padding: 28px;
   border-radius: 20px;
-  background: #fafafa;
+  border: 1px solid rgba(223, 234, 242, 0.9);
+  background: var(--surface);
+  box-shadow: var(--shadow);
+  transition:
+    box-shadow 180ms ease,
+    transform 180ms ease;
+}
+
+.pricing-summary:hover {
+  box-shadow: var(--shadow-hover);
+  transform: translateY(-2px);
 }
 
 .summary-book-preview {
@@ -1823,7 +1958,10 @@ h3 {
   place-items: center;
   overflow: hidden;
   border-radius: 16px;
-  background: #d8d9ef;
+  background:
+    linear-gradient(145deg, rgba(255, 255, 255, 0.45), transparent),
+    #d8d9ef;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.72);
   text-align: center;
 }
 
@@ -1958,11 +2096,18 @@ h3 {
   background: #c9ced3;
   font-weight: 600;
   cursor: pointer;
+  box-shadow: 0 12px 24px rgba(22, 55, 84, 0.09);
+  transition:
+    background 160ms ease,
+    box-shadow 160ms ease,
+    transform 160ms ease;
 }
 
 .template-button:hover,
 .template-button:focus-visible {
   background: #b8bec5;
+  box-shadow: var(--shadow-soft);
+  transform: translateY(-2px);
 }
 
 .summary-price {
@@ -1994,6 +2139,12 @@ h3 {
 .create-book-button:not(:disabled) {
   background: #4e83e8;
   box-shadow: 0 13px 26px rgba(78, 131, 232, 0.22);
+}
+
+.create-book-button:not(:disabled):hover,
+.create-book-button:not(:disabled):focus-visible {
+  box-shadow: 0 19px 34px rgba(78, 131, 232, 0.28);
+  transform: translateY(-2px);
 }
 
 .create-book-button:disabled {
@@ -2028,15 +2179,25 @@ h3 {
   padding: 0 18px;
   border-radius: 8px;
   color: #ffffff;
-  background: #285bff;
+  background: linear-gradient(135deg, #174dff, #3e6dff);
   box-shadow: 0 14px 30px rgba(40, 91, 255, 0.3);
   font-weight: 600;
+  transition:
+    box-shadow 160ms ease,
+    transform 160ms ease;
+}
+
+.discount-button:hover,
+.discount-button:focus-visible {
+  box-shadow: 0 20px 40px rgba(40, 91, 255, 0.36);
+  transform: translateY(-3px);
 }
 
 .brand-strip {
   border-top: 1px solid #d8dde2;
   border-bottom: 1px solid #e5e8ec;
   background: #ffffff;
+  box-shadow: 0 10px 28px rgba(22, 55, 84, 0.04);
 }
 
 .brand-strip-inner {
@@ -2160,7 +2321,10 @@ h3 {
   gap: clamp(28px, 5vw, 82px);
   align-items: start;
   padding: clamp(36px, 5vw, 48px) clamp(24px, 9vw, 132px) clamp(48px, 5.5vw, 60px);
-  background: #f4f4f4;
+  background:
+    linear-gradient(180deg, #ffffff 0%, #f5fbff 100%),
+    #f7fbff;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.9);
 }
 
 .footer-column {
@@ -2181,6 +2345,9 @@ h3 {
   color: #2168bd;
   font-size: 0.94rem;
   font-weight: 400;
+  transition:
+    color 160ms ease,
+    transform 160ms ease;
 }
 
 .footer-column a:hover,
@@ -2190,6 +2357,7 @@ h3 {
 .copyright-link:hover,
 .copyright-link:focus-visible {
   color: var(--teal);
+  transform: translateX(2px);
 }
 
 .footer-brand-panel {
@@ -2235,6 +2403,19 @@ h3 {
   color: #2674c8;
   background: #ffffff;
   box-shadow: 0 8px 18px rgba(31, 37, 43, 0.05);
+  transition:
+    background 160ms ease,
+    box-shadow 160ms ease,
+    color 160ms ease,
+    transform 160ms ease;
+}
+
+.social-links a:hover,
+.social-links a:focus-visible {
+  color: var(--teal);
+  background: var(--blue-soft);
+  box-shadow: var(--shadow-soft);
+  transform: translateY(-2px);
 }
 
 .payment-row {
